@@ -1,5 +1,12 @@
 ---
 
+- name: Install dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - debconf-utils
+
 - name: Pre-configure Lima Charlie installation key
   ansible.builtin.debconf:
     name: limacharlie
