@@ -14,5 +14,5 @@
 
 - name: Install or upgrade binary
   ansible.builtin.import_tasks: install-binary.yml
-  when: ansible_distribution not in ['Debian', 'Ubuntu'] and
-        ansible_architecture in ['i386', 'x86_64', 'aarch64']
+  when: ansible_architecture in ['aarch64'] or
+        ansible_distribution not in ['Debian', 'Ubuntu']
