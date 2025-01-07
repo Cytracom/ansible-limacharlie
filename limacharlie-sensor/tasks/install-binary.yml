@@ -2,28 +2,28 @@
 
 - name: Install the x86 LimaCharlie sensor binary
   get_url:
-    url: htttps://downloads.limacharlie.io/sensor/linux/32
+    url: https://downloads.limacharlie.io/sensor/linux/32
     dest: /bin/rphcp
     mode: 0500
   when: ansible_architecture in ['i386']
 
 - name: Install the x86_64 LimaCharlie sensor binary
   get_url:
-    url: htttps://downloads.limacharlie.io/sensor/linux/64
+    url: https://downloads.limacharlie.io/sensor/linux/64
     dest: /bin/rphcp
     mode: 0500
   when: ansible_architecture in ['x86_64']
 
 - name: Install the aarch64 LimaCharlie sensor binary
   get_url:
-    url: htttps://downloads.limacharlie.io/sensor/linux/arm64
+    url: https://downloads.limacharlie.io/sensor/linux/arm64
     dest: /bin/rphcp
     mode: 0500
   when: ansible_architecture in ['aarch64']
 
-- name: Install LimaCharlie service file
-  copy:
-    src: files/limacharlie.service
+- name: Install LimaCharlie service file from template
+  template:
+    src: files/limacharlie.service.jinja2
     dest: /etc/systemd/system/limacharlie.service
     mode: 0644
 
