@@ -1,5 +1,0 @@
----
-- hosts: 10.211.55.16
-  remote_user: root
-  roles:
-    - limacharlie-sensor
