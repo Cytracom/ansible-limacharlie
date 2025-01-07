@@ -11,3 +11,8 @@
         ansible_architecture in ['i386', 'x86_64'] and
         ( 'limacharlie' not in ansible_facts.packages or
         ansible_facts.packages['limacharlie'] | map(attribute='version') | sort | last is version( "{{ limacharlie_target_version }}", '<') )
+
+- name: Install or upgrade binary
+  ansible.builtin.import_tasks: install-binary.yml
+  when: ansible_distribution not in ['Debian', 'Ubuntu'] and
+        ansible_architecture in ['i386', 'x86_64', 'aarch64']
