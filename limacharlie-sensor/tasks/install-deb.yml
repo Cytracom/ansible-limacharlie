@@ -11,7 +11,7 @@
   ansible.builtin.debconf:
     name: limacharlie
     question: limacharlie/installation_key
-    value: "{{ installation_key }}"
+    value: "{{ limacharlie_installation_key }}"
     vtype: password
   no_log: true
 

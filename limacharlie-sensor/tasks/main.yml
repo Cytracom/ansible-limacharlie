@@ -1,8 +1,13 @@
 ---
 # tasks file for limacharlie-sensor
 
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
 - name: Install or upgrade deb
-  import_tasks: install-deb.yml
+  ansible.builtin.import_tasks: install-deb.yml
   when: ansible_distribution in ['Debian', 'Ubuntu'] and
-        ansible_architecture in ['i386', 'x86_64'] #and
-        #( ansible_facts.packages['limacharlie'] | map(attribute='version') | first | default('0') < version )
+        ansible_architecture in ['i386', 'x86_64'] and
+        ( 'limacharlie' not in ansible_facts.packages or
+        ansible_facts.packages['limacharlie'] | map(attribute='version') | sort | last is version( "{{ limacharlie_target_version }}", '<') )
