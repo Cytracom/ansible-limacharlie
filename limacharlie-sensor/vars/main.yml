@@ -2,3 +2,4 @@
 # vars file for limacharlie-sensor
 
 installation_key: 
+version: '4.32.2'

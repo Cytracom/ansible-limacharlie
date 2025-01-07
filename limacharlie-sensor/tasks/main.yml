@@ -1,9 +1,8 @@
 ---
 # tasks file for limacharlie-sensor
 
-- name: deploy binary
-  import_tasks: deploy-sensor-binary.yml
-  when: deployment == "binary"
-- name: deploy deb
-  import_tasks: deploy-sensor-deb.yml
-  when: deployment == "deb"
+- name: Install or upgrade deb
+  import_tasks: install-deb.yml
+  when: ( ansible_distribution == "Debian" or ansible_distribution == "Ubuntu" ) and
+        ( ansible_architecture == "i386" or ansible_architecture == "x86_64" ) and
+        ( "{{ ansible_facts.packages['limacharlie']| map(attribute='version') | first | default('0') }}" < {{ version }} )

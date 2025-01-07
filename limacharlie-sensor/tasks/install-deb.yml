@@ -1,0 +1,25 @@
+---
+
+- name: Pre-configure Lima Charlie installation key
+  ansible.builtin.debconf:
+    name: limacharlie
+    question: limacharlie/installation_key
+    value: "{{ installation_key }}"
+    vtype: password
+  no_log: true
+
+- name: Install limacharlie i386 deb
+  ansible.builtin.apt:
+    deb: https://downloads.limacharlie.io/sensor/linux/deb64
+  when: ansible_architecture == "i386"
+
+- name: Install limacharlie x86_64 deb
+  ansible.builtin.apt:
+    deb: https://downloads.limacharlie.io/sensor/linux/deb64
+  when: ansible_architecture == "x86_64"
+
+- name: Make sure limacharlie service is restarted and enabled
+  ansible.builtin.service:
+    name: limacharlie
+    state: restarted
+    enabled: true
