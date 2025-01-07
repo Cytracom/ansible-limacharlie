@@ -1,0 +1,13 @@
+[Unit]
+Description=LimaCharlie Agent
+[Service]
+Type=simple
+User=root
+Restart=always
+RestartSec=10
+WorkingDirectory=/etc
+ExecStart=/bin/rphcp -d {{ imacharlie_installation_key }} > /dev/null 2>&1
+StandardOutput=null
+StandardError=null
+[Install]
+WantedBy=multi-user.target
