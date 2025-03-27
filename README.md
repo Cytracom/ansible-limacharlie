@@ -1,9 +1,35 @@
-# ansible-limacharlie
+limacharlie-sensor
+=========
 
-This will be a collection of Ansible roles that can be used to interact with [LimaCharlie](http://limacharlie.io/) sensors and orgs.
+This role downloads and installs the LimaCharlie EDR sensor.
 
-## Roles
+Requirements
+------------
 
-| Name      | Description | Example Playbook |
-| ----------- | ----------- | ----------- |
-| [limacharlie-sensor](limacharlie-sensor) | Deploys the LimaCharlie EDR sensor | [Link](limacharlie-sensor.yml) |
+This role uses `get_url` to download sensor binaries and debs from LimaCharlie.
+
+Role Variables
+--------------
+
+* vars/main.yml
+  * `installation_key` must be set
+* playbook vars or --extra-vars
+  * `deployment`
+    * `deb`
+    * `binary`
+
+Example Playbook
+----------------
+
+Example playbook is in `limacharlie-sensor.yml`
+
+### Usage:
+
+#### Deploy via binary 
+```
+ansible-playbook limacharlie-sensor.yml --extra-vars "deployment=binary"
+```
+#### Deploy via deb file
+```
+ansible-playbook limacharlie-sensor.yml --extra-vars "deployment=deb"
+```
